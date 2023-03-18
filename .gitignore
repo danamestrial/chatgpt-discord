@@ -162,6 +162,6 @@ Thumbs.db #thumbnail cache on Windows
 .idea/
 
 TOKEN.txt
-
+API_KEY
 
 # End of https://www.toptal.com/developers/gitignore/api/python,JupyterNotebooks
