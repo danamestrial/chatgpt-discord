@@ -18,18 +18,7 @@ async def on_message(message):
     prompt = message.content
     if message.author == bot.user:
         return
-    if prompt.startswith("!ask"):
-        question = prompt.split("!ask", 1)[1]
-        print(question)
-        output = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=[
-                {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": question},
-            ],
-        )
-        await message.channel.send(output["choices"][0]["message"]["content"])
-    elif prompt.startswith("!askunfiltered"):
+    if prompt.startswith("!askunfiltered"):
         question = prompt.split("!askunfiltered", 1)[1]
         print(question)
         output = openai.ChatCompletion.create(
@@ -37,6 +26,17 @@ async def on_message(message):
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
                 {"role": "user", "content": CHATGPT_CRACKED + question},
+            ],
+        )
+        await message.channel.send(output["choices"][0]["message"]["content"])
+    elif prompt.startswith("!ask"):
+        question = prompt.split("!ask", 1)[1]
+        print(question)
+        output = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "user", "content": question},
             ],
         )
         await message.channel.send(output["choices"][0]["message"]["content"])
