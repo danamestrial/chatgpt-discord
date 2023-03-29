@@ -1,7 +1,7 @@
 import discord
 import openai
 
-bot = discord.Client()
+bot = discord.Client(intents=discord.Intents().all())
 
 openai.api_key = open("API_KEY").read().strip("\n")
 
@@ -18,6 +18,7 @@ async def on_message(message):
         return
     if prompt.startswith("!ask"):
         question = prompt.split("!ask", 1)[1]
+        print(question)
         output = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[
