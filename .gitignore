@@ -160,6 +160,7 @@ Thumbs.db #thumbnail cache on Windows
 
 
 .idea/
+.vim/
 
 TOKEN.txt
 API_KEY
