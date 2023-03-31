@@ -34,14 +34,16 @@ async def on_message(message):
         message_sent = await message.channel.send(f"{message.author.mention} Processing your request....")
         question = prompt.split("!askunfiltered", 1)[1]
         print(question)
-        gpt_reply = await chat_gpt_message(CHATGPT_CRACKED + question)
-        await message.channel.fetch_message(message_sent.id).edit(content=message.author.mention + gpt_reply)
+        gpt_reply = chat_gpt_message(CHATGPT_CRACKED + question)
+        message_sent = await message.channel.fetch_message(message_sent.id)
+        await message_sent.edit(content=f"{message.author.mention}\n{gpt_reply}")
     elif prompt.startswith("!ask"):
         message_sent = await message.channel.send(f"{message.author.mention} Processing your request....")
         question = prompt.split("!ask", 1)[1]
         print(question)
-        gpt_reply = await chat_gpt_message(question)
-        await message.channel.fetch_message(message_sent.id).edit(content=message.author.mention + gpt_reply)
+        gpt_reply = chat_gpt_message(question)
+        message_sent = await message.channel.fetch_message(message_sent.id)
+        await message_sent.edit(content=f"{message.author.mention}\n{gpt_reply}")
 
 
 bot.run(open("TOKEN.txt").read())
