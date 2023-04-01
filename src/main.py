@@ -19,11 +19,8 @@ async def chat_gpt_message(message):
         )
     return output["choices"][0]["message"]["content"]
 
-async def process_message(message):
-    prompt = message.content
-    message_sent = await message.channel.send(f"{message.author.mention} Processing your request....")
-    question = prompt.split("!ask", 1)[1]
-    print(question)
+async def process_message(message, question):
+    message_sent = await message.reply(f"{message.author.mention} Processing your request....")
     message_sent = await message.channel.fetch_message(message_sent.id)
     try:
         gpt_reply = await chat_gpt_message(question)
@@ -44,9 +41,13 @@ async def on_message(message):
     if message.author == bot.user:
         return
     if prompt.startswith("!askunfiltered"):
-        await process_message(message)
+        question = prompt.split("!askunfiltered", 1)[1]
+        print(question)
+        await process_message(message, CHATGPT_CRACKED + question)
     elif prompt.startswith("!ask"):
-        await process_message(message)
+        question = prompt.split("!ask", 1)[1]
+        print(question)
+        await process_message(message, question)
 
 
 bot.run(open("TOKEN.txt").read())
